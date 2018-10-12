@@ -8,52 +8,129 @@
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-<div id="add" class="flexv wrap mainbox">
-    <div class="banner"><img src="../image/logo.jpg" alt="添加成员" class="fitimg"></div>
+<div id="add" class="flexv wrap mainbox form">
+    <div class="banner"><img src="../image/add_bj.jpg" alt="添加成员" class="fitimg"></div>
     <div class="bg_white hint">您需要添加卡片使用成员，信息只能提交一次，请慎重填写</div>
 
     <form class="flexv members">
         <div class="flexv member">
-            <p class="title">成员1</p>
+            <div class="between list-t">
+                <p class="title"></p>
+            </div>
             <div class="flexv bg_white list">
-                <label class="flex input">
-                    <span class="flex centerv tit">姓名</span>
-                    <input type="text" name="name" class="flexitem" placeholder="请输入姓名">
+                <label class="flex centerv input">
+                    <span class="flex tit">姓名</span>
+                    <input type="text" name="name" class="flexitem" data-rule="cname" data-errmsg="请输入2-4位中文姓名" placeholder="请输入姓名" value="小明">
                 </label>
-                <label class="flex input">
-                    <span class="flex centerv tit">身份证号</span>
-                    <input type="text" name="identity" class="flexitem" placeholder="请输入身份证号">
+                <label class="flex centerv input">
+                    <span class="flex tit">身份证号</span>
+                    <input type="text" name="identity" class="flexitem" data-rule="sfz" data-errmsg="请输入正确身份证" data-sync="成员重复" maxlength="18" placeholder="请输入身份证号" value="42102319930212102X">
                 </label>
             </div>
         </div>
         <div class="flexv member">
-            <p class="title">成员2</p>
+            <div class="between list-t">
+                <p class="title"></p>
+            </div>
             <div class="flexv bg_white list">
-                <label class="flex input">
-                    <span class="flex centerv tit">姓名</span>
-                    <input type="text" name="name" class="flexitem" placeholder="请输入姓名">
+                <label class="flex centerv input">
+                    <span class="flex tit">姓名</span>
+                    <input type="text" name="name" class="flexitem" data-rule="cname" data-errmsg="请输入2-4位中文姓名" placeholder="请输入姓名" value="小明">
                 </label>
-                <label class="flex input">
-                    <span class="flex centerv tit">身份证号</span>
-                    <input type="text" name="identity" class="flexitem" placeholder="请输入身份证号">
+                <label class="flex centerv input">
+                    <span class="flex tit">身份证号</span>
+                    <input type="text" name="identity" class="flexitem" data-rule="sfz" data-errmsg="请输入正确身份证" data-sync="成员重复" maxlength="18" placeholder="请输入身份证号" value="42102319930212101X">
                 </label>
             </div>
         </div>
         <a href="javascript:;" class="flex center bg_white add_btn">
             <i class="flex center fx fx-add"></i><span class="flex center">添加其他成员</span>
         </a>
-        <a href="javascript:;" class="flex center submit">确认添加</a>
+        <a href="javascript:;" class="flex center bg_grad submit">确认添加</a>
     </form>
 </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script src="../js/functions.js"></script>
+<script src="../js/checkForm.js"></script>
 <script type="text/javascript">
-  $(function () {
-     const num = $('.member').length;
-     $('.member').forEach((item)=>{
+   $(function () {
+      const total = 5; // 总个数
 
-     })
+      const data = [
+         {name: "小明", identity: "42102319930212102X"},
+         {name: "小明", identity: "42102319930212101X"}
+      ]
 
-  })
+      function init() {
+         // 自动填写成员数
+         $('.member p.title').forEach((item, index) => {
+            $(item).text(`成员${index + 1}`);
+         });
+
+         // 判断成员数删除添加
+         let num = $('.member').length;  // 已有个数
+         if (num >= total) {
+            $('a.add_btn').remove();
+         }
+      }
+      // 初始化一次
+      init();
+
+      // 点击添加成员
+      $('.members').on('click','a.add_btn',_throttle(function () {
+         const member = `<div class="flexv member">
+            <div class="between list-t">
+                <p class="title"></p>
+                <i class="flex center fx fx-close"></i>
+            </div>
+            <div class="flexv bg_white list">
+                <label class="flex centerv input">
+                    <span class="flex tit">姓名</span>
+                    <input type="text" name="name" class="flexitem" data-rule="cname" data-errmsg="请输入2-4位中文姓名" placeholder="请输入姓名" value="小明">
+                </label>
+                <label class="flex centerv input">
+                    <span class="flex tit">身份证号</span>
+                    <input type="text" name="identity" class="flexitem" data-rule="sfz" data-errmsg="请输入正确身份证" data-sync="成员重复" maxlength="18" placeholder="请输入身份证号" value="42102319930212102X">
+                </label>
+            </div>
+         </div>`;
+         $(this).before(member);
+
+         // 删除添加项
+         $('i.fx-close').click(function () {
+            $(this).parents('.member').remove();
+
+            // 判断删除成员后是否显示添加按钮
+            let num = $('.member').length;  // 已有个数
+            if (num <= total && !$('a.add_btn').length) {
+               const add = `<a href="javascript:;" class="flex center bg_white add_btn">
+                   <i class="flex center fx fx-add"></i><span class="flex center">添加其他成员</span>
+               </a>`;
+               $('a.submit').before(add);
+            }
+         });
+
+         // 重新初始化
+         init();
+      }, 500));
+
+      // 验证表单
+      new checkForm({
+         form:'.members',
+         btn:'.submit',
+         list:'.member',
+         error: function (ele,err) {showMsg(err)},
+         complete: function (ele) {
+            let posts = [];
+            ele.forEach((item)=>{
+               let flage = data.some((val)=>{return item.identity == val.identity});
+               if(!flage){posts.push(item)}
+            });
+
+            console.log(posts);
+         }
+      });
+   })
 </script>
 </html>

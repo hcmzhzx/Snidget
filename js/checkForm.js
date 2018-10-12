@@ -11,12 +11,13 @@ var checkForm = function (config) {
       "card": /^\d{13,21}$/,
       "pwd": /^[^\s]{6,16}$/,
       "domain": /^[^\s]{3,6}$/,
-      "code": /^\d{6}/,
-      "sfz": /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/
+      "code": /^\d{4}/,
+      "sfz": /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/  // 出生日期(1800~2099)
    };
 
    this.form = config.form || '#forms';
    this.btn = config.btn || '.submit';
+   this.list = config.list || null;
    this.error = config.error || null;
    this.complete = config.complete || null;
 
@@ -24,42 +25,37 @@ var checkForm = function (config) {
       return obj ? obj.querySelectorAll(selector) : document.querySelector(selector);
    };
 
-   var _this = this, _btn = selector(_this.btn), _form = selector(_this.form);
+   let _this = this, _btn = selector(this.btn), _form = selector(this.form);
    if(!_btn || !_form) return this;
 
    _btn.addEventListener('click',function (){
-      var _formEle = selector('input,select,textarea',_form), posts = {}, data = {};
-      for (var i = 0; i < _formEle.length; i++) {
-         var ele = _formEle[i], value = ele.value, name = ele.getAttribute('name'), rule = ele.getAttribute('data-rule'), sync = ele.getAttribute('data-sync');
-         // 是否开启验证
-         if (sync) {
-            // 判断是否属于下拉框
-            if (inputs[i].localName == 'select') {
-               var errmsg = ele.getAttribute('data-errmsg');
-               if (value == '0' || value != '') {
-                  return error(errmsg)
+      let posts = [], data = {}, _list = selector(_this.list,_form);
+      for(let i = 0; i < _list.length; i++){
+         let item = selector('input,select,textarea',_list[i]);
+         for(let j = 0; j < item.length; j++){
+            let val = item[j].value,
+               name = item[j].getAttribute('name'),
+               rule = item[j].getAttribute('data-rule'),
+               ruleReg = _this.defaultRule[rule],
+               errmsg = item[j].getAttribute('data-errmsg'),
+               sync = item[j].getAttribute('data-sync');
+            if (!ruleReg.test(val)) {
+               item[j].focus();
+               return _this.error(item[j],errmsg);
+            } else if(posts.length && sync){
+               if(val == posts[j-1][name]){
+                  item[j].focus();
+                  return _this.error(item[j],sync);
                } else {
-                  posts[name] = value
+                  data[`${name}`] = val;
                }
             } else {
-               var ruleReg = _this.defaultRule[rule], errmsg = ele.getAttribute('data-errmsg');
-               if (!ruleReg.test(value)) {
-                  ele.focus();
-                  return error(errmsg)
-               } else {
-                  posts[name] = value
-               }
+               data[`${name}`] = val;
             }
-         } else {
-            posts[name] = value
          }
+         posts.push(data);
+         data={};
       }
-      // 过滤掉没有 name 的值
-      for (let [key, val] of Object.entries(posts)) {
-         if (key != 'null') {
-            data[key] = val;
-         }
-      }
-      _this.complete(data);
+      _this.complete(posts);
    })
 }

@@ -1,4 +1,4 @@
-@import url(https://at.alicdn.com/t/font_868088_0u67lbi0vwh.css);
+@import url(https://at.alicdn.com/t/font_868088_cyyg48a3v5e.css);
 .fx{-webkit-text-stroke-width:0;}
 /********************* ↑ icon图标 ↑ *************************/
 html,body{font-size:calc(100vw/37.5);height:100%;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100% !important;font-family: "Roboto", "Open Sans", "PingFang", "PingFang SC", "PingFang HK", "PingFang TC", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue",'\5FAE\8F6F\96C5\9ED1',Arial,'\9ED1\4F53','\5B8B\4F53', sans-serif;}
@@ -20,9 +20,9 @@ input[type=file]{position:absolute;top:0;left:0;bottom:0;right:0;opacity:0;width
 .flexv{display:-webkit-box;-webkit-box-orient:vertical;}  /*垂直排列*/
 .flexitem{display:-webkit-box;-webkit-box-flex:1;-webkit-flex:1;flex:1;}
 .flexitemv{display:-webkit-box;-webkit-box-flex:1;-webkit-flex:1;flex:1;-webkit-box-orient:vertical;}
+.center{-webkit-box-align:center;-webkit-box-pack:center;}
 .centerv{-webkit-box-align:center;}  /*垂直居中*/
 .centerh{-webkit-box-pack:center;}  /*水平居中*/
-.center{-webkit-box-align:center;-webkit-box-pack:center;}
 .endh{-webkit-box-pack:end;}  /*水平向右*/
 .endv{-webkit-box-align:end;} /*垂直向下*/
 .endhc{-webkit-box-align:end;-webkit-box-pack:center;}  /*水平结构居中底部,垂直结构居中靠右*/
@@ -52,15 +52,16 @@ element::-webkit-scrollbar,.mainbox::-webkit-scrollbar{display:none;} /*清除�
 /********************* 共有属性 *************************/
 html,body{background:#f7f3f0;}
 .bg_white{background:#fff;}
+.bg_grad{background:linear-gradient(to right top, #eea32e, #f2b668);}
 
 
 /********************* 我的 *************************/
-#home .head{padding:2rem 0 5rem 1rem;background:linear-gradient(to right top, #eea32e, #f2b668);font-size:1.7rem;}
+#home .head{padding:2rem 0 5rem 1rem;font-size:1.7rem;}
 #home .head .userInfo .img{width:4rem;height:4rem;border-radius:50%;overflow:hidden;border:1px solid #fff;}
 #home .head .userInfo .name{margin:0 1rem;color:#fff;max-width:14rem;-webkit-line-clamp:1;overflow:hidden;}
 #home .head .userInfo .fx-redact{font-size:2rem;color:#fff;}
 #home .head .back{padding:.6rem 1rem;color:#fdb143;border-top-left-radius:2rem;border-bottom-left-radius:2rem;}
-#home .nav_lists,#Income .nav_lists{padding:0 1rem;position:absolute;top:15%;left:50%;width:100%;transform:translateX(-50%);}
+#home .nav_lists,#Income .nav_lists{padding:0 1rem;position:absolute;top:8rem;left:50%;width:100%;transform:translateX(-50%);}
 #home .nav_lists .bg_white,#Income .nav_lists .bg_white{margin-bottom:2rem;box-shadow:0 2px 10px 0 #ccc;border-radius:1rem;font-size:1.5rem;}
 #home .nav_lists .nav,#Income .nav_lists .nav{padding:.6rem 0;}
 #home .nav_lists .bg_white i.fx,#Income .nav_lists .bg_white i.fx{font-size:2.6rem;}
@@ -113,9 +114,6 @@ html,body{background:#f7f3f0;}
 #open .zhizun{background:url("../image/gray.png")no-repeat;background-size:cover;}
 #open .zuanshi{background:url("../image/gray.png")no-repeat;background-size:cover;}
 #open .bojin{background:url("../image/gray.png")no-repeat;background-size:cover;}
-/******************** 实名认证 ***********************/
-#certification{}
-
 /******************** 申请提现 ***********************/
 #withdraw .heads{background:#fdb143;height:16rem;color:#fff;}
 #withdraw .heads .title{position:relative;font-size:1.7rem;}
@@ -132,25 +130,53 @@ html,body{background:#f7f3f0;}
 #withdraw .hint .title:before{left:24%;}
 #withdraw .hint .title:after{right:24%;}
 /******************** 我的奖励 ***********************/
-#Income .head{padding:2rem 0 5rem;background:linear-gradient(to right top, #eea32e, #f2b668);font-size:1.7rem;color:#fff;}
+#Income .head{padding:2rem 0 5rem;font-size:1.7rem;color:#fff;}
 #Income .head span.sum{font-size:4rem;}
-#Income .nav_lists{top:20%;}
+#Income .nav_lists{top:10.8rem;}
 #Income .nav_lists .nav span.num{font-size:2rem;color:#fdb143;}
 #Income .nav_lists .nav i.line{width:1px;height:3rem;background:#ddd;}
 #Income .nav_lists .detail i.fx{color:#2b8fde;}
 #Income .nav_lists .withdraw i.fx{color:#d1504c;}
 #Income .nav_lists .log i.fx{color:#eca53f;}
+/******************** 实名认证 ***********************/
+.form .banner{font-size:0;}
+.form .hint{padding:.8rem .4rem;font-size:1.4rem;color:#fdb143;}
+.form .members .list{padding:0 1rem;font-size:1.6rem;}
+.form .members .list .input{padding:1.2rem 0;border-bottom:1px solid #ddd;}
+.form .members .list .input:last-child{border-bottom:none;}
+.form .members .list .input input{height:auto;}
+.form .members .list .input span.tit{width:7rem;}
+#certification.form .members .list .input a.code_btn{margin-left:1rem;padding:.4rem .8rem;border-radius:.6rem;border:1px solid #fdb143;font-size:1.4rem;color:#fdb143;}
+#certification.form .members .list .input a.code_btn.current{border-color:#bbb;color:#bbb;}
+.form .members .submit{margin:2rem auto;padding:1rem 2rem;width:14rem;border-radius:1rem;font-size:1.6rem;color:#fff;}
 /******************** 添加成员 ***********************/
-#add .banner{height:14rem;}
-#add .hint{padding:.8rem .4rem;font-size:1.4rem;color:#fdb143;}
-#add .members .title{padding:.8rem 1rem;font-size:1.4rem;}
-#add .members .list{padding:0 1rem;font-size:1.6rem;}
-#add .members .list .input{padding:1.2rem 0;border-bottom:1px solid #ddd;}
-#add .members .list .input:last-child{border-bottom:none;}
-#add .members .list .input span.tit{width:7rem;}
+#add .members .list-t{padding:.8rem 1rem;}
+#add .members .list-t .title{font-size:1.4rem;}
+#add .members .list-t i.fx-close{font-size:2rem;color:#bbb;}
 #add .members .add_btn{margin:2rem 0;padding:.4rem 0;border-top:1px solid #fdb143;border-bottom:1px solid #fdb143;font-size:1.6rem;color:#fdb143;}
 #add .members .add_btn i.fx-add{font-size:3.2rem;color:#fdb143;}
-#add .members .submit{margin:2rem auto;padding:1rem 2rem;width:14rem;border-radius:1rem;background:linear-gradient(to right top, #eea32e, #f2b668);font-size:1.6rem;color:#fff;}
+/******************** 购买会员 ***********************/
+#purchase .head .banner{font-size:0;}
+#purchase .head .card_name{padding:1rem;background:#ff9909;font-size:1.6rem;color:#fff;}
+#purchase .head .price{position:relative;padding:1rem;font-size:1.6rem;}
+#purchase .head .price em.discount{margin-left:1rem;padding:.2rem .4rem;border-radius:.4rem;background:#fdb143;font-size:1.2rem;color:#fff;}
+#purchase .introduce{margin-top:1rem;padding:0 1rem 1rem;}
+#purchase .introduce p.title{padding:.8rem 0;font-weight:bold;font-size:1.6rem;color:#fdb143;}
+#purchase .introduce p.text,#purchase .introduce p.explain{font-size:1.4rem;}
+#purchase .introduce p.explain{padding:1rem 0;color:#fdb143;}
+#purchase .introduce p.explain i.fx-v{margin-right:.6rem;font-size:2rem;color:#fdb143;}
+#purchase .introduce p.explain span{width:calc(100% - 2.4rem)}
+#purchase .introduce table.box th{width:33%;height:3rem;font-size:1.6rem;color:#fff;}
+#purchase .introduce table.box th.type{background:#fda422;}
+#purchase .introduce table.box th.content{background:#fbbb63;}
+#purchase .introduce table.box th.equity{background:#fed498;}
+#purchase .introduce table.box tr{border-top:6px solid #fff;border-bottom:6px solid #fff;}
+#purchase .introduce table.box td{padding:1rem 0;}
+#purchase .introduce table.box tr td:nth-child(1){background:#efeaf0;text-align:center;}
+#purchase .introduce table.box tr td:nth-child(2){background:#f1f1f1;padding-left:.4rem;}
+/*#purchase .introduce table.box tr td:nth-child(2) li{list-style:inside;}*/
+#purchase .introduce table.box tr td:nth-child(3){background:#f7f6fb;text-align:center;}
+#purchase a.buy_btn{height:4rem;background:#fda422;font-size:1.6rem;color:#fff;}
 
 
 
