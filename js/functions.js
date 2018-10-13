@@ -20,8 +20,7 @@ function _throttle(method, duration) {
  * @param blen Boolean 是否转化为数字
  */
 function Substring(str, size, blen) {
-   size = size || 1;
-   blen = blen || false;
+   size = size || 1; blen = blen || false;
    if (blen) {
       return Number(str.substring(0, str.length - size));
    }
@@ -46,7 +45,7 @@ function getStyle(dom, attr) {
 function Toast(text, time, dom) {
    dom = dom || 'body';
    time = time || 2000;
-   const box = `<div id="toast" style="position:fixed;top:50%;left:50%;display:flex;justify-content:center;align-items:center;padding:.6rem 1rem;height:3rem;background:rgba(0,0,0,.7);border-radius:.6rem;font-size:1.5em;color:#fff;visibility:hidden;">${text}</div>`;
+   const box = `<div id="toast" style="position:fixed;top:50%;left:50%;display:flex;justify-content:center;align-items:center;padding:.6rem 2rem;height:4rem;background:rgba(0,0,0,.7);border-radius:.6rem;font-size:1.5em;color:#fff;visibility:hidden;">${text}</div>`;
    $(dom).append(box);
    let W = Substring(getStyle('#toast', 'width'), 2, true) / 2, H = Substring(getStyle('#toast', 'height'), 2, true) / 2;
    $('#toast').css({'margin': `-${H}px 0 0 -${W}px`, 'animation': 'fadeInUp .2s linear .2s both', 'visibility': 'visible'})
@@ -87,17 +86,17 @@ function showMsg(msg, state, dom, timeout) {
       bgColor = 'background:rgba(0,0,0,0.6)';
       icon = '<span style="position:absolute;top:18px;left:10px;width:24px;height:2px;background:#fff;transform:rotate(-45deg);"></span><span style="position:absolute;top:22px;left:2px;width:14px;height:2px;background:#fff;transform:rotate(45deg);"></span>';
    }
-   var template = `<div id="msgBox" style="position:${pos};top:50%;left:50%;width:160px;padding:10px;margin-left:-90px;${bgColor};border-radius:4px;transform:scale(0);transition:transform 0.2s linear;z-index:999;">
+   var template = `<div id="msgBox" style="position:${pos};top:50%;left:50%;min-width:120px;padding:10px;${bgColor};border-radius:4px;transform:scale(0);transition:transform 0.2s linear;z-index:999;">
        <div class="icon" style="position:relative;width:36px;height:36px;border-radius:50%;border:2px solid #fff;margin:0 auto;">${icon}</div>
        <div class="msg" style="padding:8px 0;text-align:center;font-size:1.4em;color:#fff;">${msg}</div>
        </div>`;
    $(template).appendTo($(dom));
    setTimeout(function () {
-      var ih = ($('#msgBox').height() + 20) / 2;
-      $('#msgBox').css({'margin-top': -ih, 'transform': 'scale(1)'});
+      var ih = ($('#msgBox').height() + 20) / 2, iw = ($('#msgBox').width() + 20) / 2;
+      $('#msgBox').css({'margin': `-${ih}px 0 0 -${iw}px`, 'transform': 'scale(1)'});
    }, 100);
    setTimeout(function () {
-      $('#msgBox').remove();
+      //$('#msgBox').remove();
    }, timeout + 100);
 }
 

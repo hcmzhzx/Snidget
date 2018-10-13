@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-<div id="certification" class="flexv wrap form">
+<div id="certification" class="flexv wrap mainbox form">
     <div class="banner"><img src="../image/approve.jpg" alt="添加成员" class="flex fitimg"></div>
     <div class="hint">您需要进行实名认证，信息只能提交一次，请慎重填写</div>
 
-    <form class="flexv members">
+    <form class="flexitemv members">
         <div class="flexv member">
             <div class="flexv bg_white list">
                 <label class="flex centerv input">
@@ -47,8 +47,9 @@
       $('a.code_btn').click(_throttle(function () {
          if($(this).hasClass('current')) return;
          smsTimer($(this), '重新获取', 60, 'current');
-      }, 500));
 
+         showProgress('发送中...');
+      }, 500));
 
       // 验证表单
       new checkForm({

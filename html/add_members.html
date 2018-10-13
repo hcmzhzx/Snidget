@@ -12,7 +12,7 @@
     <div class="banner"><img src="../image/add_bj.jpg" alt="添加成员" class="flex fitimg"></div>
     <div class="bg_white hint">您需要添加卡片使用成员，信息只能提交一次，请慎重填写</div>
 
-    <form class="flexv members">
+    <form class="flexitemv members">
         <div class="flexv member">
             <div class="between list-t">
                 <p class="title"></p>
@@ -123,10 +123,10 @@
          error: function (ele,err) {showMsg(err)},
          complete: function (ele) {
             let posts = [];
-            ele.forEach((item)=>{
+            /*ele.forEach((item)=>{
                let flage = data.some((val)=>{return item.identity == val.identity});
                if(!flage){posts.push(item)}
-            });
+            });*/
 
             console.log(posts);
          }
