@@ -14,6 +14,51 @@ function _throttle(method, duration) {
    }
 }
 /**
+ * 截取字符串
+ * @param str string 要截取的字符串
+ * @param size number 截取纪委
+ * @param blen Boolean 是否转化为数字
+ */
+function Substring(str, size, blen) {
+   size = size || 1;
+   blen = blen || false;
+   if (blen) {
+      return Number(str.substring(0, str.length - size));
+   }
+   return str.substring(0, str.length - size);
+}
+
+/**
+ * 获取元素的属性
+ * @param dom 节点名
+ * @param attr string 属性名
+ */
+function getStyle(dom, attr) {
+   return getComputedStyle(document.querySelector(dom))[attr]
+}
+
+/**
+ * 温馨提示自动隐藏
+ * @param text 提示文字
+ * @param time 删除时间
+ * @param dom  插入节点名
+ */
+function Toast(text, time, dom) {
+   dom = dom || 'body';
+   time = time || 2000;
+   const box = `<div id="toast" style="position:fixed;top:50%;left:50%;display:flex;justify-content:center;align-items:center;padding:.6rem 1rem;height:3rem;background:rgba(0,0,0,.7);border-radius:.6rem;font-size:1.5em;color:#fff;visibility:hidden;">${text}</div>`;
+   $(dom).append(box);
+   let W = Substring(getStyle('#toast', 'width'), 2, true) / 2, H = Substring(getStyle('#toast', 'height'), 2, true) / 2;
+   $('#toast').css({'margin': `-${H}px 0 0 -${W}px`, 'animation': 'fadeInUp .2s linear .2s both', 'visibility': 'visible'})
+   setTimeout(() => {
+      $('#toast').css({'animation': 'fadeOutUp .2s linear .2s both'});
+      setTimeout(() => {
+         $('#toast').remove();
+      }, 500);
+   }, time);
+}
+
+/**
  * 加载动画
  * @param str string 提示文字
  */
@@ -44,7 +89,7 @@ function showMsg(msg, state, dom, timeout) {
    }
    var template = `<div id="msgBox" style="position:${pos};top:50%;left:50%;width:160px;padding:10px;margin-left:-90px;${bgColor};border-radius:4px;transform:scale(0);transition:transform 0.2s linear;z-index:999;">
        <div class="icon" style="position:relative;width:36px;height:36px;border-radius:50%;border:2px solid #fff;margin:0 auto;">${icon}</div>
-       <div class="msg" style="padding:8px 0;text-align:center;color:#fff;">${msg}</div>
+       <div class="msg" style="padding:8px 0;text-align:center;font-size:1.4em;color:#fff;">${msg}</div>
        </div>`;
    $(template).appendTo($(dom));
    setTimeout(function () {
@@ -77,3 +122,20 @@ function smsTimer(obj, html, interval, cls) {
    }, 1000);
 }
 
+/**
+ * 复制到剪切板
+ * @param cls 要复制的元素class
+ * @param text string 提示文字
+ */
+function copyPlate(cls, text) {
+   if (document.querySelector('#copyPlate')) document.body.removeChild(document.querySelector('#copyPlate'));
+   var otext = document.createElement('textarea');
+   otext.value = document.querySelector(cls).getAttribute('data-copy');
+   otext.setAttribute('readonly', 'readonly');
+   otext.setAttribute('id', 'copyPlate');
+   otext.style = `font-size:12pt;border:0px;padding:0px;margin:0px;position:absolute;left:-9999px;top:0px;`;
+   document.body.appendChild(otext);
+   otext.select(); // 选中当前对象
+   document.execCommand("Copy"); // 将当前选中区复制到剪贴板。
+   Toast(text);
+}

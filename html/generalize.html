@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+   <title>推广奖励</title>
+   <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="generalize" class="flexv wrap mainbox">
+   <div class="flexv center head">
+      <h1 class="text"><img src="../image/push_txt.png" alt="推广奖励" class="flex fitimg"></h1>
+      <p class="hint">邀请好友成功&nbsp;拿<span>30%</span>提成奖励</p>
+      <a href="Income.html" class="flex center award_btn">我的奖励</a>
+   </div>
+   <div class="flexv rule">
+      <h2 class="flex center title">推广规则</h2>
+      <p class="text">1、小伙伴通过你推广的链接开通急救会员服务你就能拿到付款金额的30%佣金奖励，开通的金额越多奖励的金额就越多。</p>
+      <p class="text">2、奖励金额将自动计入您的钱包，所获得的金额都能提现。</p>
+   </div>
+   <div class="flexitem centerh btn_box">
+      <div class="between box">
+         <a href="javascirpt:;" class="flex center qrcode_btn">点击生成推广二维码</a>
+         <a href="javascirpt:;" class="flex center href_btn" data-copy="我是链接">&nbsp;点击生成推广链接&nbsp;</a>
+      </div>
+   </div>
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script src="../js/functions.js"></script>
+<script type="text/javascript">
+   $(function () {
+      $('.href_btn').click(function () {
+         copyPlate('.href_btn','复制成功');
+      })
+   })
+</script>
+</html>

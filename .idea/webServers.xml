@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ea832eb8-3d77-493a-8572-20c9c73f8262" name="Snidget" url="http://use.zx85.net/chengming/Snidget">
+        <fileTransfer host="123.207.123.182" port="21" rootFolder="/public_html/chengming/Snidget">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

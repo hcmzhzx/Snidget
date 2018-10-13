@@ -10,7 +10,7 @@
 <body>
 <div id="purchase" class="flexv wrap mainbox">
     <div class="flexv bg_white head">
-        <p class="banner"><img src="../image/logo.jpg" alt="卡类" class="fitimg"></p>
+        <p class="banner"><img src="../image/zhizun_bj.jpg" alt="卡类" class="flex fitimg"></p>
         <p class="card_name">铂金卡/钻石卡/至尊卡</p>
         <p class="flex price">&yen;<span class="flex">365/年</span><em class="flex center discount">优惠价</em></p>
     </div>
@@ -22,19 +22,18 @@
         <p class="title">会员服务期</p>
         <p class="text">会员卡于购买当日生效，会员服务期位生效之日起一年。</p>
         <p class="flex explain"><i class="flex fx fx-v"></i><span class="flex">成为我们的个人贵宾卡会员后，您可获得以下会员权益：</span></p>
-
         <table class="box">
             <thead>
-                <tr><th class="type">服务类型</th><th class="content">服务内容</th><th class="equity">会员权益</th></tr>
+                <tr><th class="type">服务类型</th><th class="content">服务内容</th><th class="benefit">会员权益</th></tr>
             </thead>
             <tbody>
                 <tr>
                     <td>院前救援服务</td>
                     <td>
                         <ul>
-                            <li>&bull; 地面救护车协助</li>
-                            <li>&bull; 直升机空中运输</li>
-                            <li>&bull; 空中医疗救护</li>
+                            <li>&bull;&ensp;地面救护车协助</li>
+                            <li>&bull;&ensp;直升机空中运输</li>
+                            <li>&bull;&ensp;空中医疗救护</li>
                         </ul>
                     </td>
                     <td>1元享有直升机救援全年不限次</td>
@@ -43,10 +42,10 @@
                     <td>医疗转运服务</td>
                     <td>
                         <ul>
-                            <li>&bull; 院间转运</li>
-                            <li>&bull; 器官转运</li>
-                            <li>&bull; 特殊设备、药品、血浆转运</li>
-                            <li>&bull; 医疗专家转运</li>
+                            <li>&bull;&ensp;院间转运</li>
+                            <li>&bull;&ensp;器官转运</li>
+                            <li>&bull;&ensp;特殊设备、药品、血浆转运</li>
+                            <li>&bull;&ensp;医疗专家转运</li>
                         </ul>
                     </td>
                     <td>标准费用9折优惠</td>
@@ -55,19 +54,51 @@
                     <td>关联服务</td>
                     <td>
                         <ul>
-                            <li>&bull; 紧急联络家属</li>
+                            <li>&bull;&ensp;紧急联络家属</li>
                         </ul>
                     </td>
                     <td>免费</td>
                 </tr>
             </tbody>
         </table>
-
     </div>
     <a href="javascript:;" class="flex center buy_btn">立即购买</a>
 </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script src="../js/functions.js"></script>
 <script type="text/javascript">
+   $(function () {
+      const is_perfect = 0;
+      // 购买
+      $('a.buy_btn').click(_throttle(function () {
+         const alert = `<div id="alert"><div class="mask"></div></div>`;
+         $('body').append(alert);
+         let cont = '';
+         if(is_perfect){
+            // 去查看权益
+            cont = `<div class="content bg_white view">
+               <div class="banner"><img src="../image/view.png" alt="购买成功" class="flex fitimg"></div>
+               <h2 class="flex center title">购买成功！</h2>
+               <div class="text">恭喜您成功购买空中救援会员服务！</div>
+               <div class="flex center button"><a href="my_benefit.html" class="flex center btn">查看权益</a></div>
+            </div>`;
+         } else {
+            // 未完善
+            cont = `<div class="content bg_white to_perfect">
+               <div class="banner"><img src="../image/to_perfect.png" alt="购买成功" class="flex fitimg"></div>
+               <h2 class="flex center title">购买成功！</h2>
+               <div class="text">立即完善身份信息，享受不限次直升机救援服务！</div>
+               <div class="flex center button"><a href="certification.html" class="flex center btn">去完善</a></div>
+            </div>`;
+         }
+         $('#alert').append(cont);
 
+         // 关闭
+         $('#alert .mask').click(function () {
+            $('#alert').remove();
+         })
+      },500));
+   });
 </script>
 </html>

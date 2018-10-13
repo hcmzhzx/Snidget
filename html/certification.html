@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="certification" class="flexv wrap form">
-    <div class="banner"><img src="../image/approve.jpg" alt="添加成员" class="fitimg"></div>
+    <div class="banner"><img src="../image/approve.jpg" alt="添加成员" class="flex fitimg"></div>
     <div class="hint">您需要进行实名认证，信息只能提交一次，请慎重填写</div>
 
     <form class="flexv members">
@@ -55,9 +55,7 @@
          form: '.members',
          btn: '.submit',
          list: '.member',
-         error: function (ele, err) {
-            showMsg(err)
-         },
+         error: function (ele, err) {showMsg(err)},
          complete: function (ele) {
             const posts = ele[0];
             console.log(posts);

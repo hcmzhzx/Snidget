@@ -1,33 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>申请提现</title>
-    <link rel="stylesheet" href="../css/index.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+   <title>申请提现</title>
+   <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
 <div id="withdraw" class="flexv wrap">
-    <div class="aroundv heads">
-        <div class="flex center title">推广奖励申请提现</div>
-        <div class="flexv center balance">
-            <span class="flex sum">100</span>
-            <em class="flex txt">当前可提余额</em>
-        </div>
-        <div class="flex center btnbox">
-            <a href="javascript:;" class="flex center bg_white btn">申请提现</a>
-        </div>
-    </div>
-    <div class="flexitemv bg_white hint">
-        <div class="flex center title">温馨提示</div>
-        <p>1、单次提现最多200元</p>
-        <p>2、提现完成请在微信点击领取红包</p>
-    </div>
+   <div class="aroundv heads">
+      <div class="flex center title">推广奖励申请提现</div>
+      <a href="javascript:;" class="between account_box">
+         <div class="flexv account">
+            <p class="name">未绑定账户</p>
+            <p class="num">您当前尚未绑定支付宝请先绑定</p>
+         </div>
+         <i class="flex center fx fx-right"></i>
+      </a>
+      <div class="flexv center balance">
+         <span class="flex sum">100</span>
+         <em class="flex txt">当前可提余额</em>
+      </div>
+      <div class="flex center btnbox">
+         <a href="javascript:;" class="flex center btn">申请提现</a>
+      </div>
+      <p class="bottom"><img src="../image/wave.png" class="fitimg"></p>
+   </div>
+   <div class="flexitemv bg_white hint">
+      <div class="flex center title">温馨提示</div>
+      <p>1、提现金额最晚在下一个工作日24:00之前到账</p>
+      <p>2、周六、周日与节假日顺延至下一个工作日！</p>
+   </div>
 </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script src="../js/functions.js"></script>
+<script src="../js/checkForm.js"></script>
 <script type="text/javascript">
-  
+   $(function () {
+      // 填写支付宝
+      $('a.account_box').click(function () {
+         const from_aot = `<div id="alert">
+         <div class="mask"></div>
+         <form class="content bg_white binding">
+            <h2 class="flex center title">绑定支付宝账户</h2>
+            <div class="flexv list">
+               <label class="flex centerv input">
+                  <span class="flex">姓名</span><input type="text" name="name" class="flexitem" data-rule="cname" data-errmsg="请输入2-4位中文姓名" placeholder="请填写您的真实姓名">
+               </label>
+               <label class="flex centerv input">
+                  <span class="flex">账号</span><input type="text" name="account" class="flexitem" data-rule="*" data-errmsg="账户名不能为空" placeholder="请填写您的支付宝账户">
+               </label>
+               <div class="aroundh button">
+                  <a href="javascript:;" class="flex center btn submit">提交绑定</a>
+               </div>
+            </div>
+         </form>
+         </div>`;
+         $('#withdraw').append(from_aot);
+
+         // 验证表单
+         new checkForm({
+            form: '.binding',
+            btn: '.submit',
+            list: '.list',
+            error: function (ele, err) {showMsg(err)},
+            complete: function (ele) {
+               const posts = ele[0];
+
+               showMsg('提交成功',1);
+               $('#alert').remove();
+               console.log(posts);
+            }
+         });
+      });
+   });
 </script>
 </html>
