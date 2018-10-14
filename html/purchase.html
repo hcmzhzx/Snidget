@@ -85,37 +85,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <script src="../js/functions.js"></script>
 <script type="text/javascript">
-   $(function () {
-      const is_perfect = 1;
-      // 购买
-      $('a.buy_btn').click(_throttle(function () {
-         const alert = `<div id="alert"><div class="mask"></div></div>`;
-         $('body').append(alert);
-         let cont = '';
-         if(is_perfect){
-            // 去查看权益
-            cont = `<div class="content bg_white view">
-               <div class="banner"><img src="../image/view.png" alt="购买成功" class="flex fitimg"></div>
-               <h2 class="flex center title">购买成功！</h2>
-               <div class="text">恭喜您成功购买空中救援会员服务！</div>
-               <div class="flex center button"><a href="my_benefit.html" class="flex center btn">查看权益</a></div>
-            </div>`;
-         } else {
-            // 未完善
-            cont = `<div class="content bg_white to_perfect">
-               <div class="banner"><img src="../image/to_perfect.png" alt="购买成功" class="flex fitimg"></div>
-               <h2 class="flex center title">购买成功！</h2>
-               <div class="text">立即完善身份信息，享受不限次直升机救援服务！</div>
-               <div class="flex center button"><a href="certification.html" class="flex center btn">去完善</a></div>
-            </div>`;
-         }
-         $('#alert').append(cont);
-
-         // 关闭
-         $('.mask').click(function () {
-            $('#alert').remove();
-         })
-      },500));
-   });
+$(function () {
+   const is_perfect = 1;
+   // 购买
+   $('a.buy_btn').click(_debounce(function () {
+      const alert = `<div id="alert"><div class="mask"></div></div>`;
+      $('body').append(alert);
+      let cont = '';
+      if(is_perfect){
+         // 去查看权益
+         cont = `<div class="content bg_white view">
+            <div class="banner"><img src="../image/view.png" alt="购买成功" class="flex fitimg"></div>
+            <h2 class="flex center title">购买成功！</h2>
+            <div class="text">恭喜您成功购买空中救援会员服务！</div>
+            <div class="flex center button"><a href="my_benefit.html" class="flex center btn">查看权益</a></div>
+         </div>`;
+      } else {
+         // 未完善
+         cont = `<div class="content bg_white to_perfect">
+            <div class="banner"><img src="../image/to_perfect.png" alt="购买成功" class="flex fitimg"></div>
+            <h2 class="flex center title">购买成功！</h2>
+            <div class="text">立即完善身份信息，享受不限次直升机救援服务！</div>
+            <div class="flex center button"><a href="certification.html" class="flex center btn">去完善</a></div>
+         </div>`;
+      }
+      $('#alert').append(cont);
+   },500));
+   // 关闭弹框
+   $('body').on('click','.mask',function () {
+      $('#alert').remove();
+   })
+});
 </script>
 </html>

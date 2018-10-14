@@ -72,48 +72,50 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <script type="text/javascript">
-   $(function () {
+$(function () {
+   if($('.lists').hasClass('current')){
+      $('.box').addClass('flexitem');
+   } else {
+      $('.box').removeClass('flexitem');
+   }
+
+   // tab 切换
+   $('.tab a').click(function () {
+      if($(this).hasClass('current')) return false;
+      $(this).addClass('current').siblings().removeClass('current');
+      let index = $(this).index();
+      $('.tab_box').eq(index).removeClass('current').siblings().addClass('current');
       if($('.lists').hasClass('current')){
          $('.box').addClass('flexitem');
       } else {
          $('.box').removeClass('flexitem');
       }
-
-      // tab 切换
-      $('.tab a').click(function () {
-         if($(this).hasClass('current')) return false;
-         $(this).addClass('current').siblings().removeClass('current');
-         let index = $(this).index();
-         $('.tab_box').eq(index).removeClass('current').siblings().addClass('current');
-         if($('.lists').hasClass('current')){
-            $('.box').addClass('flexitem');
-         } else {
-            $('.box').removeClass('flexitem');
-         }
-      });
-
-      // 一键呼救
-      const vip = 1;
-      $('a.sos_btn').click(function () {
-         if(vip){
-            const alert = `<div id="alert"><div class="mask"></div>
-               <div class="content bg_white help">
-                  <div class="banner"><img src="../image/view.png" alt="呼救" class="flex fitimg"></div>
-                  <div class="text">您还未开通会员，将按市场价格进行收费</div>
-                  <h2 class="flex center title">确定呼救吗？</h2>
-                  <div class="aroundh button">
-                     <a href="tel:4009-120-999" class="flex center btn continue">继续呼救</a>
-                     <a href="purchase.html" class="flex center btn dredge">开通会员</a>
-                  </div>
-               </div>
-            </div>`;
-            $('body').append(alert);
-            // 关闭
-            $('#alert .mask').click(function () {$('#alert').remove()})
-         } else {
-            window.open('tel:4009-120-999');
-         }
-      })
    });
+
+   // 一键呼救
+   const vip = 1;
+   $('a.sos_btn').click(function () {
+      if(vip){
+         const alert = `<div id="alert"><div class="mask"></div>
+            <div class="content bg_white help">
+               <div class="banner"><img src="../image/view.png" alt="呼救" class="flex fitimg"></div>
+               <div class="text">您还未开通会员，将按市场价格进行收费</div>
+               <h2 class="flex center title">确定呼救吗？</h2>
+               <div class="aroundh button">
+                  <a href="tel:4009-120-999" class="flex center btn continue">继续呼救</a>
+                  <a href="purchase.html" class="flex center btn dredge">开通会员</a>
+               </div>
+            </div>
+         </div>`;
+         $('body').append(alert);
+      } else {
+         window.open('tel:4009-120-999');
+      }
+   });
+   // 关闭弹框
+   $('body').on('click','.mask',function () {
+      $('#alert').remove();
+   });
+});
 </script>
 </html>

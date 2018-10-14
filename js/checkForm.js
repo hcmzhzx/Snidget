@@ -21,18 +21,18 @@ var checkForm = function (config) {
    this.error = config.error || null;
    this.complete = config.complete || null;
 
-   function selector(selector,obj){
+   function selector(selector, obj) {
       return obj ? obj.querySelectorAll(selector) : document.querySelector(selector);
    };
 
    let _this = this, _btn = selector(this.btn), _form = selector(this.form);
-   if(!_btn || !_form) return this;
+   if (!_btn || !_form) return this;
 
-   _btn.addEventListener('click',function (){
-      let posts = [], data = {}, _list = selector(_this.list,_form);
-      for(let i = 0; i < _list.length; i++){
-         let item = selector('input,select,textarea',_list[i]);
-         for(let j = 0; j < item.length; j++){
+   _btn.addEventListener('click', function () {
+      let posts = [], data = {}, _list = selector(_this.list, _form);
+      for (let i = 0; i < _list.length; i++) {
+         let item = selector('input,select,textarea', _list[i]);
+         for (let j = 0; j < item.length; j++) {
             let val = item[j].value.trim(),
                name = item[j].getAttribute('name'),
                rule = item[j].getAttribute('data-rule'),
@@ -41,11 +41,11 @@ var checkForm = function (config) {
                sync = item[j].getAttribute('data-sync');
             if (!ruleReg.test(val)) {
                item[j].focus();
-               return _this.error(item[j],errmsg);
-            } else if(posts.length && sync){
-               if(val == posts[j-1][name]){
+               return _this.error(item[j], errmsg);
+            } else if (posts.length && sync) {
+               if (val == posts[j - 1][name]) {
                   item[j].focus();
-                  return _this.error(item[j],sync);
+                  return _this.error(item[j], sync);
                } else {
                   data[`${name}`] = val;
                }
@@ -54,7 +54,7 @@ var checkForm = function (config) {
             }
          }
          posts.push(data);
-         data={};
+         data = {};
       }
       _this.complete(posts);
    })

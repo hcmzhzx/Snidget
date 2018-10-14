@@ -38,53 +38,52 @@
 <script src="../js/functions.js"></script>
 <script src="../js/checkForm.js"></script>
 <script type="text/javascript">
-   $(function () {
-      // 填写支付宝
-      $('a.account_box').click(function () {
-         const from_aot = `<div id="alert">
-         <div class="mask"></div>
-         <form class="content bg_white binding">
-            <h2 class="flex center title">绑定支付宝账户</h2>
-            <div class="flexv list">
-               <label class="flex centerv input">
-                  <span class="flex">姓名</span><input type="text" name="name" class="flexitem" data-rule="cname" data-errmsg="请输入2-4位中文姓名" placeholder="请填写您的真实姓名">
-               </label>
-               <label class="flex centerv input">
-                  <span class="flex">账号</span><input type="text" name="account" class="flexitem" data-rule="*" data-errmsg="账户名不能为空" placeholder="请填写您的支付宝账户">
-               </label>
-               <div class="aroundh button">
-                  <a href="javascript:;" class="flex center btn submit">提交绑定</a>
-               </div>
+$(function () {
+   // 填写支付宝
+   $('a.account_box').click(function () {
+      const from_aot = `<div id="alert">
+      <div class="mask"></div>
+      <form class="content bg_white binding">
+         <h2 class="flex center title">绑定支付宝账户</h2>
+         <div class="flexv list">
+            <label class="flex centerv input">
+               <span class="flex">姓名</span><input type="text" name="name" class="flexitem" data-rule="cname" data-errmsg="请输入2-4位中文姓名" placeholder="请填写您的真实姓名">
+            </label>
+            <label class="flex centerv input">
+               <span class="flex">账号</span><input type="text" name="account" class="flexitem" data-rule="*" data-errmsg="账户名不能为空" placeholder="请填写您的支付宝账户">
+            </label>
+            <div class="aroundh button">
+               <a href="javascript:;" class="flex center btn submit">提交绑定</a>
             </div>
-         </form>
-         </div>`;
-         $('#withdraw').append(from_aot);
+         </div>
+      </form>
+      </div>`;
+      $('#withdraw').append(from_aot);
 
-         // 验证表单
-         new checkForm({
-            form: '.binding',
-            btn: '.submit',
-            list: '.list',
-            error: function (ele, err) {showMsg(err)},
-            complete: function (ele) {
-               const posts = ele[0];
-               showProgress('发送中...');
+      // 验证表单
+      new checkForm({
+         form: '.binding',
+         btn: '.submit',
+         list: '.list',
+         error: function (ele, err) {showMsg(err)},
+         complete: function (ele) {
+            const posts = ele[0];
+            showProgress('提交中...');
 
-               // 模拟数据请求(无实质作用)
-               setTimeout(()=>{
-                  hideProgress(); //删除动画
-                  showMsg('提交成功',1);
-                  $('#alert').remove();
-                  console.log(posts);
-               },2000)
-            }
-         });
-
-         // 关闭弹框
-         $('.mask').click(function () {
-            $('#alert').remove();
-         });
+            // 模拟数据请求(无实质作用)
+            setTimeout(()=>{
+               hideProgress(); //删除动画
+               showMsg('提交成功',1);
+               $('#alert').remove();
+               console.log(posts);
+            },2000)
+         }
       });
    });
+   // 关闭弹框
+   $('body').on('click','.mask',function () {
+      $('#alert').remove();
+   })
+});
 </script>
 </html>

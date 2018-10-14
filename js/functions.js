@@ -1,16 +1,29 @@
 /**
  * 节流函数 返回函数连续调用时
- * @param method {function}  请求关联函数，实际应用需要调用的函数
- * @param duration  {number} 延迟时间，单位毫秒
+ * @param method   {function}  请求关联函数，实际应用需要调用的函数
+ * @param duration {number} 延迟时间，单位毫秒
  */
 function _throttle(method, duration) {
-   var begin = new Date();
+   let begin = new Date();
    return function () {
-      var current = new Date();
+      let current = new Date();
       if (current - begin >= duration) {
          method.apply(this, arguments);
          begin = current;
       }
+   }
+}
+/**
+ * 去抖函数 返回函数连续调用时
+ * @param method {function}  请求关联函数，实际应用需要调用的函数
+ * @param delay  {number} 延迟时间，单位毫秒
+ */
+function _debounce(method, delay){
+   return function () {
+      clearTimeout(method.id);
+      method.id = setTimeout(() => {
+         method.call(this, arguments);
+      }, delay);
    }
 }
 /**
@@ -20,8 +33,7 @@ function _throttle(method, duration) {
  * @param blen Boolean 是否转化为数字
  */
 function Substring(str, size, blen) {
-   size = size || 1;
-   blen = blen || false;
+   size = size || 1; blen = blen || false;
    if (blen) {
       return Number(str.substring(0, str.length - size));
    }
@@ -43,6 +55,7 @@ function getStyle(dom, attr) {
  */
 function Toast(text, time, dom) {
    dom = dom || 'body'; time = time || 2000;
+   if (document.querySelector('#toast')) document.body.removeChild(document.querySelector('#toast'));
    const box = `<div id="toast" style="position:fixed;top:50%;left:50%;display:flex;justify-content:center;align-items:center;padding:.6rem 2rem;height:4rem;background:rgba(0,0,0,.7);border-radius:.6rem;font-size:1.5em;color:#fff;visibility:hidden;">${text}</div>`;
    $(dom).append(box);
    let W = Substring(getStyle('#toast', 'width'), 2, true) / 2, H = Substring(getStyle('#toast', 'height'), 2, true) / 2;
