@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>我的</title>
-    <link rel="stylesheet" href="../css/index.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+   <title>我的</title>
+   <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
 <div id="home" class="flexv wrap mainbox">
-    <div class="between bg_grad head">
-        <div class="flex center userInfo">
-            <div class="img"><img src="../image/user.jpg" alt="用户头像" class="radimg"></div>
-            <div class="flexv name">胡小胡小胡小胡小胡小胡小胡小胡</div>
-        </div>
-        <a href="index.html" class="flex center bg_white back">回到首页</a>
-    </div>
-    <div class="flexv nav_lists">
-        <div class="aroundh bg_white nav">
-            <a href="javascript:;" class="flexv center VIP"><i class="flex center fx fx-VIP"></i><span class="flex">开通会员</span></a>
-            <a href="javascript:;" class="flexv center quanyi"><i class="flex center fx fx-quanyi"></i><span class="flex">我的权益</span></a>
-            <a href="javascript:;" class="flexv center log"><i class="flex center fx fx-record"></i><span class="flex">开通记录</span></a>
-        </div>
-        <div class="flexv bg_white lists">
-            <a href="javascript:;" class="flex centerv list promote"><i class="flex center fx fx-promote"></i><span class="flex">推广中心</span></a>
-            <a href="javascript:;" class="flex centerv list history"><i class="flex center fx fx-history"></i><span class="flex">服务历史</span></a>
-            <a href="javascript:;" class="flex centerv list service"><i class="flex center fx fx-service"></i><span class="flex">联系客服</span></a>
-        </div>
-    </div>
+   <div class="between bg_grad head">
+      <div class="flex center userInfo">
+         <div class="img"><img src="../image/user.jpg" alt="用户头像" class="radimg"></div>
+         <div class="flexv name">胡小胡小胡小胡小胡小胡小胡小胡</div>
+      </div>
+      <a href="sos.html" class="flex center bg_white back">回到首页</a>
+   </div>
+   <div class="flexv nav_lists">
+      <div class="aroundh bg_white nav">
+         <a href="purchase.html" class="flexv center VIP"><i class="flex center fx fx-VIP"></i><span class="flex">开通会员</span></a>
+         <a href="my_benefit.html" class="flexv center quanyi"><i class="flex center fx fx-quanyi"></i><span class="flex">我的权益</span></a>
+         <a href="open_record.html" class="flexv center log"><i class="flex center fx fx-record"></i><span class="flex">开通记录</span></a>
+      </div>
+      <div class="flexv bg_white lists">
+         <a href="generalize.html" class="flex centerv list promote"><i class="flex center fx fx-promote"></i><span class="flex">推广中心</span></a>
+         <a href="service.html" class="flex centerv list history"><i class="flex center fx fx-history"></i><span class="flex">服务历史</span></a>
+         <a href="javascript:;" class="flex centerv list service"><i class="flex center fx fx-service"></i><span class="flex">联系客服</span></a>
+      </div>
+   </div>
 </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <script type="text/javascript">
-  
+  $(function () {
+     // 联系客服
+     $('a.service').click(function () {
+        const qrcode = `<div id="alert">
+         <div class="mask"></div>
+         <div class="content bg_white qrcode_box">
+            <h2 class="flex center title">联系客服</h2>
+            <div class="flex center qrcode-img"><img src="http://use.zx85.net/chengming/8.1/image/qrcode.jpg" class="fitimg"></div>
+            <p class="flex center text">↑ ↑ ↑长按识别二维码↑ ↑ ↑</p>
+         </div>
+         </div>`;
+        $('body').append(qrcode);
+
+        // 关闭弹框
+        $('.mask').click(function () {
+           $('#alert').remove();
+        });
+     });
+  })
 </script>
 </html>

@@ -22,7 +22,7 @@
          <span class="flex sum">100</span>
          <em class="flex txt">当前可提余额</em>
       </div>
-      <div class="flex center btnbox">
+      <div class="flex center btnbox">    <!--current-->
          <a href="javascript:;" class="flex center btn">申请提现</a>
       </div>
       <p class="bottom"><img src="../image/wave.png" class="fitimg"></p>
@@ -68,11 +68,21 @@
             error: function (ele, err) {showMsg(err)},
             complete: function (ele) {
                const posts = ele[0];
+               showProgress('发送中...');
 
-               showMsg('提交成功',1);
-               $('#alert').remove();
-               console.log(posts);
+               // 模拟数据请求(无实质作用)
+               setTimeout(()=>{
+                  hideProgress(); //删除动画
+                  showMsg('提交成功',1);
+                  $('#alert').remove();
+                  console.log(posts);
+               },2000)
             }
+         });
+
+         // 关闭弹框
+         $('.mask').click(function () {
+            $('#alert').remove();
          });
       });
    });

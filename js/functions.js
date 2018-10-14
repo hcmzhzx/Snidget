@@ -27,16 +27,14 @@ function Substring(str, size, blen) {
    }
    return str.substring(0, str.length - size);
 }
-
 /**
  * 获取元素的属性
  * @param dom 节点名
  * @param attr string 属性名
  */
 function getStyle(dom, attr) {
-   return getComputedStyle(document.querySelector(dom))[attr]
+   return window.getComputedStyle(document.querySelector(dom))[attr];
 }
-
 /**
  * 温馨提示自动隐藏
  * @param text 提示文字
@@ -44,9 +42,8 @@ function getStyle(dom, attr) {
  * @param dom  插入节点名
  */
 function Toast(text, time, dom) {
-   dom = dom || 'body';
-   time = time || 2000;
-   const box = `<div id="toast" style="position:fixed;top:50%;left:50%;display:flex;justify-content:center;align-items:center;padding:.6rem 1rem;height:3rem;background:rgba(0,0,0,.7);border-radius:.6rem;font-size:1.5em;color:#fff;visibility:hidden;">${text}</div>`;
+   dom = dom || 'body'; time = time || 2000;
+   const box = `<div id="toast" style="position:fixed;top:50%;left:50%;display:flex;justify-content:center;align-items:center;padding:.6rem 2rem;height:4rem;background:rgba(0,0,0,.7);border-radius:.6rem;font-size:1.5em;color:#fff;visibility:hidden;">${text}</div>`;
    $(dom).append(box);
    let W = Substring(getStyle('#toast', 'width'), 2, true) / 2, H = Substring(getStyle('#toast', 'height'), 2, true) / 2;
    $('#toast').css({'margin': `-${H}px 0 0 -${W}px`, 'animation': 'fadeInUp .2s linear .2s both', 'visibility': 'visible'})
@@ -57,7 +54,6 @@ function Toast(text, time, dom) {
       }, 500);
    }, time);
 }
-
 /**
  * 加载动画
  * @param str string 提示文字
@@ -71,6 +67,13 @@ function showProgress(str) {
    document.body.appendChild(template);
 }
 /**
+ * 删除加载动画
+ */
+function hideProgress() {
+   var object = document.getElementById('loading');
+   if (object) document.body.removeChild(object);
+}
+/**
  * 提示框
  * @param msg 描述
  * @param state 状态
@@ -78,7 +81,7 @@ function showProgress(str) {
  * @param timeout 隐藏时间
  */
 function showMsg(msg, state, dom, timeout) {
-   var state = state || 0, timeout = timeout || 1000, dom = dom || 'body';
+   state = state || 0; timeout = timeout || 1000; dom = dom || 'body';
    var icon = '', bgColor = '', pos = dom == 'body' ? 'fixed' : 'absolute';
    if (state == 0) {
       bgColor = 'background:rgba(255,0,0,0.6)';
@@ -87,20 +90,19 @@ function showMsg(msg, state, dom, timeout) {
       bgColor = 'background:rgba(0,0,0,0.6)';
       icon = '<span style="position:absolute;top:18px;left:10px;width:24px;height:2px;background:#fff;transform:rotate(-45deg);"></span><span style="position:absolute;top:22px;left:2px;width:14px;height:2px;background:#fff;transform:rotate(45deg);"></span>';
    }
-   var template = `<div id="msgBox" style="position:${pos};top:50%;left:50%;width:160px;padding:10px;margin-left:-90px;${bgColor};border-radius:4px;transform:scale(0);transition:transform 0.2s linear;z-index:999;">
+   var template = `<div id="msgBox" style="position:${pos};top:50%;left:50%;min-width:120px;padding:10px;${bgColor};border-radius:4px;transform:scale(0);transition:transform 0.2s linear;z-index:999;">
        <div class="icon" style="position:relative;width:36px;height:36px;border-radius:50%;border:2px solid #fff;margin:0 auto;">${icon}</div>
        <div class="msg" style="padding:8px 0;text-align:center;font-size:1.4em;color:#fff;">${msg}</div>
        </div>`;
    $(template).appendTo($(dom));
    setTimeout(function () {
-      var ih = ($('#msgBox').height() + 20) / 2;
-      $('#msgBox').css({'margin-top': -ih, 'transform': 'scale(1)'});
+      let ih = Substring(getStyle('#msgBox', 'height'),2,true)/2, iw = Substring(getStyle('#msgBox', 'width'),2,true)/2;
+      $('#msgBox').css({'margin':`-${ih}px 0 0 -${iw}px`,'transform':'scale(1)'});
    }, 100);
    setTimeout(function () {
       $('#msgBox').remove();
    }, timeout + 100);
 }
-
 /**
  * 短信验证码定时器
  * @param obj 发送按钮
@@ -110,18 +112,17 @@ function showMsg(msg, state, dom, timeout) {
  */
 function smsTimer(obj, html, interval, cls) {
    obj.addClass(cls);
-   obj.html(html + '(' + interval + 's)');
+   obj.html(`${html}(${interval}s)`);
    interval--;
    var time = setInterval(function () {
       if (interval == 0) {
          obj.attr('style', '').removeClass(cls).text(html);
          clearInterval(time);
       } else {
-         obj.text(html + '(' + (interval--) + 's)');
+         obj.text(`${html}(${interval--}s)`);
       }
    }, 1000);
 }
-
 /**
  * 复制到剪切板
  * @param cls 要复制的元素class
@@ -130,7 +131,7 @@ function smsTimer(obj, html, interval, cls) {
 function copyPlate(cls, text) {
    if (document.querySelector('#copyPlate')) document.body.removeChild(document.querySelector('#copyPlate'));
    var otext = document.createElement('textarea');
-   otext.value = document.querySelector(cls).getAttribute('data-copy');
+   otext.value = document.querySelector(cls).getAttribute('data-copy').trim();
    otext.setAttribute('readonly', 'readonly');
    otext.setAttribute('id', 'copyPlate');
    otext.style = `font-size:12pt;border:0px;padding:0px;margin:0px;position:absolute;left:-9999px;top:0px;`;
