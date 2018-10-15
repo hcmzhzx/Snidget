@@ -30,37 +30,37 @@
          <div class="flexitemv tab_box lists current">
             <div class="list title">套餐列表</div>
             <div class="flex centerv list">
-               <div class="flex name">乐福卡/个人贵宾卡</div>
+               <div class="flexitem name">乐福卡/个人贵宾卡</div>
                <div class="flexitem describe">全国统一零售价：365<br/>使用人数：1人/年</div>
                <a href="purchase.html" class="flex center btn">查看</a>
             </div>
             <div class="flex centerv list">
-               <div class="flex name">家庭卡/家福卡</div>
+               <div class="flexitem name">家庭卡/家福卡</div>
                <div class="flexitem describe">全国统一零售价：999<br/>使用人数：3人/年</div>
                <a href="purchase.html" class="flex center btn">查看</a>
             </div>
             <div class="flex centerv list">
-               <div class="flex name">三福卡</div>
+               <div class="flexitem name">三福卡</div>
                <div class="flexitem describe">全国统一零售价：999<br/>使用人数：1人/3年</div>
                <a href="purchase.html" class="flex center btn">查看</a>
             </div>
             <div class="flex centerv list">
-               <div class="flex name">五福卡</div>
+               <div class="flexitem name">五福卡</div>
                <div class="flexitem describe">全国统一零售价：1588<br/>使用人数：1人/5年</div>
                <a href="purchase.html" class="flex center btn">查看</a>
             </div>
             <div class="flex centerv list">
-               <div class="flex name">铂金卡</div>
+               <div class="flexitem name">铂金卡</div>
                <div class="flexitem describe">全国统一零售价：2888<br/>使用人数：1人/年</div>
                <a href="purchase.html" class="flex center btn">查看</a>
             </div>
             <div class="flex centerv list">
-               <div class="flex name">钻石卡</div>
+               <div class="flexitem name">钻石卡</div>
                <div class="flexitem describe">全国统一零售价：6666<br/>使用人数：3人/年</div>
                <a href="purchase.html" class="flex center btn">查看</a>
             </div>
             <div class="flex centerv list">
-               <div class="flex name">至尊卡</div>
+               <div class="flexitem name">至尊卡</div>
                <div class="flexitem describe">全国统一零售价：9999<br/>使用人数：5人/年</div>
                <a href="purchase.html" class="flex center btn">查看</a>
             </div>
@@ -98,8 +98,8 @@ $(function () {
       if(vip){
          const alert = `<div id="alert"><div class="mask"></div>
             <div class="content bg_white help">
-               <div class="banner"><img src="../image/view.png" alt="呼救" class="flex fitimg"></div>
-               <div class="text">您还未开通会员，将按市场价格进行收费</div>
+               <div class="banner"><img src="../image/cry.png" alt="呼救" class="flex fitimg"></div>
+               <div class="flex center text">您还未开通会员，将按市场价格进行收费</div>
                <h2 class="flex center title">确定呼救吗？</h2>
                <div class="aroundh button">
                   <a href="tel:4009-120-999" class="flex center btn continue">继续呼救</a>
@@ -112,6 +112,7 @@ $(function () {
          window.open('tel:4009-120-999');
       }
    });
+
    // 关闭弹框
    $('body').on('click','.mask',function () {
       $('#alert').remove();

@@ -80,11 +80,11 @@ html,body{background:#f7f3f0;}
 /********************* 我的 *************************/
 #home .head{padding:2rem 0 5rem 1rem;font-size:1.8rem;}
 #home .head .userInfo .img{width:6rem;height:6rem;border-radius:50%;overflow:hidden;border:1px solid #fff;}
-#home .head .userInfo .name{margin:0 1rem;color:#fff;max-width:18rem;-webkit-line-clamp:1;overflow:hidden;}
+#home .head .userInfo .name{margin:0 1rem;color:#fff;-webkit-line-clamp:1;overflow:hidden;}
 #home .head .userInfo .fx-redact{font-size:2rem;color:#fff;}
 #home .head .back{padding:.6rem 1rem;color:#fdb143;border-top-left-radius:2rem;border-bottom-left-radius:2rem;}
 #home .nav_lists,#Income .nav_lists{padding:0 1rem;position:absolute;top:10rem;left:50%;width:100%;transform:translateX(-50%);}
-#home .nav_lists .bg_white,#Income .nav_lists .bg_white{margin-bottom:2rem;box-shadow:0 2px 10px 0 #ccc;border-radius:1rem;font-size:1.6rem;}
+#home .nav_lists .bg_white,#Income .nav_lists .bg_white{margin-bottom:2rem;-webkit-box-shadow: 0 2px 10px 0 #ccc;box-shadow:0 2px 10px 0 #ccc;border-radius:1rem;font-size:1.6rem;}
 #home .nav_lists .nav,#Income .nav_lists .nav{padding:.6rem 0;}
 #home .nav_lists .bg_white i.fx,#Income .nav_lists .bg_white i.fx{font-size:2.6rem;}
 #home .nav_lists .nav i.fx{color:#fdb143;}
@@ -104,7 +104,7 @@ html,body{background:#f7f3f0;}
 #detail .content>.box.current{display:table}
 #detail .content .all{padding:1rem;font-size:1.6rem;}
 #detail .content .all .between{padding:1rem .6rem;}
-#detail .content .all .bg_white{box-shadow:0 2px 10px 0 #ccc;}
+#detail .content .all .bg_white{box-shadow:0 2px 10px 0 #ccc;-webkit-box-shadow: 0 2px 10px 0 #ccc;}
 #detail .content .all .total{margin-bottom:1rem;border-radius:.4rem;color:#fdb143;}
 #detail .content .all .list{border-radius:.4rem;}
 #detail .content .all .list>div{border-bottom:1px solid #eee;}
@@ -117,7 +117,7 @@ html,body{background:#f7f3f0;}
 #detail .content table.box td{font-size:1.4rem;}
 /******************** 服务历史 ***********************/
 #service{padding:1rem 1rem 0;}
-#service .list{margin-bottom:1rem;padding:1rem 1rem 1rem 1.4rem;border-left:.6rem solid #fdb143;box-shadow:0 2px 10px 0 #ccc;font-size:1.6rem;}
+#service .list{margin-bottom:1rem;padding:1rem 1rem 1rem 1.4rem;border-left:.6rem solid #fdb143;box-shadow:0 2px 10px 0 #ccc;-webkit-box-shadow: 0 2px 10px 0 #ccc;font-size:1.6rem;}
 #service .list>div{padding:.2rem 0;}
 #service .list>div>span{width:8rem;}
 #service .list div.text{width:calc(100% - 8rem);}
@@ -153,7 +153,7 @@ html,body{background:#f7f3f0;}
 #withdraw .heads .balance{margin-bottom:2rem;}
 #withdraw .heads .balance span.sum{font-size:4rem;font-weight:bold;}
 #withdraw .heads .balance em.txt{font-size:1.5rem;}
-#withdraw .heads .btnbox a.btn{padding:.8rem 2.6rem;border-radius:2rem;box-shadow:0 2px 10px 0 #999;background:#d1ccc9;font-size:1.6rem;color:#fff;}
+#withdraw .heads .btnbox a.btn{padding:.8rem 2.6rem;border-radius:2rem;box-shadow:0 2px 10px 0 #999;-webkit-box-shadow:0 2px 10px 0 #999;background:#d1ccc9;font-size:1.6rem;color:#fff;}
 #withdraw .heads .btnbox a.btn.current{background:#fff;color:#fda422;}
 #withdraw .hint{padding:1rem;font-size:1.5rem;color:#656565;}
 #withdraw .hint>*{margin-bottom:1.8rem;}
@@ -217,14 +217,14 @@ html,body{background:#f7f3f0;}
 .introduce table.box tr td:nth-child(2){background:#f1f1f1;}
 .introduce table.box tr td:nth-child(3){background:#f7f6fb;text-align:center;color:#fdb143;}
 .introduce table.box tr td:nth-child(3) ul{text-align:left;}
-#purchase a.buy_btn{position:relative;height:5rem;background:#fda422;box-shadow:0 -2px 10px 2px #ccc;font-size:1.6rem;color:#fff;}
+#purchase a.buy_btn{position:relative;height:5rem;background:#fda422;box-shadow:0 -2px 10px 2px #ccc;-webkit-box-shadow:0 -2px 10px 2px #ccc;font-size:1.6rem;color:#fff;}
 /******************** 我的权益 ***********************/
 #benefit .head{padding:.6rem 1rem 1rem;}
 #benefit .head .card_box{margin-bottom:.4rem;width:100%;font-size:1.6rem;}
 #benefit .head .card_box i.fx-card{font-size:3rem;color:#fdb143;}
 #benefit .head .card_box .check{color:#bbb;}
 #benefit .head .card_box .check i.fx-right{font-size:2rem;}
-#benefit .add_box{position:relative;box-shadow:0 -2px 10px 2px #ccc;}
+#benefit .add_box{position:relative;box-shadow:0 -2px 10px 2px #ccc;-webkit-box-shadow:0 -2px 10px 2px #ccc;}
 #benefit a.add_btn{margin:1rem auto;width:20rem;padding:.8rem 2rem;border-radius:1rem;font-size:1.8rem;color:#fff;}
 #benefit a.add_btn i.fx-add{margin-bottom:-.2rem;font-size:3rem;}
 /******************** 推广奖励 ***********************/
@@ -232,7 +232,7 @@ html,body{background:#f7f3f0;}
 #generalize .head{margin-top:1rem;}
 #generalize .head .text{width:16rem;}
 #generalize .head .hint{padding:1rem 0;font-size:1.4rem;}
-#generalize .head a.award_btn{padding:.6rem 2rem;border-radius:2rem;background:linear-gradient(to bottom, #afdcf7, #12b8f6);box-shadow:0 4px 12px 0 #f54413;font-size:1.6rem;}
+#generalize .head a.award_btn{padding:.6rem 2rem;border-radius:2rem;background:linear-gradient(to bottom, #afdcf7, #12b8f6);box-shadow:0 4px 12px 0 #f54413;-webkit-box-shadow:0 4px 12px 0 #f54413;font-size:1.6rem;}
 #generalize .rule{padding:0 1rem;}
 #generalize .rule .title{margin:4rem 0;font-weight:bold;font-size:1.8rem;}
 #generalize .rule .text{line-height:1.6em;font-size:1.5rem;}
@@ -249,12 +249,12 @@ html,body{background:#f7f3f0;}
 #sos .box .brief{padding:1rem;font-size:1.6rem;}
 #sos .box .brief .text{margin-bottom:1rem;line-height:2rem;color:#999;}
 #sos .box .brief .text span{color:#f70604;}
-#sos .box .brief .sos_btn{width:10rem;height:10rem;border-radius:50%;overflow:hidden;background:linear-gradient(to bottom, #f55d5f, #f70604);box-shadow:0 2px 12px 0 #f94d43;font-size:1.6rem;color:#fff;}
+#sos .box .brief .sos_btn{width:10rem;height:10rem;border-radius:50%;overflow:hidden;background:linear-gradient(to bottom, #f55d5f, #f70604);box-shadow:0 2px 12px 0 #f94d43;-webkit-box-shadow:0 2px 12px 0 #f94d43;font-size:1.6rem;color:#fff;}
 #sos .box .lists .list{padding:1rem .6rem 1rem 1rem;border-bottom:1px solid #ddd;}
 #sos .box .lists .title{font-size:1.8rem;color:#fdb143;}
 #sos .box .lists .name{width:14rem;font-size:1.6rem;}
 #sos .box .lists .describe{font-size:1.4rem;color:#bbb;}
-#sos .box .lists a.btn{margin-left:.6rem;padding:.2rem 1.4rem;border:1px solid #fdb143;box-shadow:0 0 4px 0 #fdb143;border-radius:2rem;font-size:1.6rem;color:#fdb143;}
+#sos .box .lists a.btn{margin-left:.6rem;padding:.2rem 1.4rem;border:1px solid #fdb143;box-shadow:0 0 4px 0 #fdb143;-webkit-box-shadow:0 0 4px 0 #fdb143;border-radius:2rem;font-size:1.6rem;color:#fdb143;}
 #sos a.nearby_btn{height:5rem;background:#ff9909;font-size:1.6rem;color:#fff;}
 #alert .help .button a.continue{background:#fff;border:1px solid #fda422;color:#fda422;}
 

@@ -29,7 +29,7 @@ function _debounce(method, delay){
 /**
  * 截取字符串
  * @param str string 要截取的字符串
- * @param size number 截取纪委
+ * @param size number 截取位数
  * @param blen Boolean 是否转化为数字
  */
 function Substring(str, size, blen) {

@@ -10,9 +10,9 @@
 <body>
 <div id="home" class="flexv wrap mainbox">
    <div class="between bg_grad head">
-      <div class="flex center userInfo">
+      <div class="flexitem center userInfo">
          <div class="img"><img src="../image/user.jpg" alt="用户头像" class="radimg"></div>
-         <div class="flexv name">胡小胡小胡小胡小胡小胡小胡小胡</div>
+         <div class="flexitemv name">胡小胡小胡小胡小胡小胡小胡小胡</div>
       </div>
       <a href="sos.html" class="flex center bg_white back">回到首页</a>
    </div>
@@ -32,24 +32,24 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
 <script type="text/javascript">
-  $(function () {
-     // 联系客服
-     $('a.service').click(function () {
-        const qrcode = `<div id="alert">
-         <div class="mask"></div>
-         <div class="content bg_white qrcode_box">
-            <h2 class="flex center title">联系客服</h2>
-            <div class="flex center qrcode-img"><img src="http://use.zx85.net/chengming/8.1/image/qrcode.jpg" class="fitimg"></div>
-            <p class="flex center text">↑ ↑ ↑长按识别二维码↑ ↑ ↑</p>
-         </div>
-         </div>`;
-        $('body').append(qrcode);
+$(function () {
+   // 联系客服
+   $('a.service').click(function () {
+      const qrcode = `<div id="alert">
+   <div class="mask"></div>
+   <div class="content bg_white qrcode_box">
+      <h2 class="flex center title">联系客服</h2>
+      <div class="flex center qrcode-img"><img src="http://use.zx85.net/chengming/8.1/image/qrcode.jpg" class="fitimg"></div>
+      <p class="flex center text">↑ ↑ ↑长按识别二维码↑ ↑ ↑</p>
+   </div>
+   </div>`;
+      $('body').append(qrcode);
+   });
 
-        // 关闭弹框
-        $('.mask').click(function () {
-           $('#alert').remove();
-        });
-     });
-  })
+   // 关闭弹框
+   $('body').on('click', '.mask', function () {
+      $('#alert').remove();
+   });
+})
 </script>
 </html>

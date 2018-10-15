@@ -11,8 +11,8 @@
 <div id="purchase" class="flexv wrap">
     <div class="flexitemv mainbox">
         <div class="flexv bg_white head">
-            <p class="banner"><img src="../image/zhizun_bj.jpg" alt="卡类" class="flex fitimg"></p>
-            <p class="card_name">铂金卡/钻石卡/至尊卡</p>
+            <p class="banner"><img src="../image/b-sanfu_bj.jpg" alt="卡类" class="flex fitimg"></p>
+            <p class="card_name">三福卡</p>
             <p class="flex centerv price">&yen;<span class="flex">365/年</span><em class="flex center discount">优惠价</em></p>
         </div>
         <div class="bg_white introduce">
@@ -21,7 +21,9 @@
             <p class="title">医疗保障体系</p>
             <p class="text">（1）急救中心（120）：与急救中心合作，共同搭建地空联动的立体化救援网络，为社会大众提供全面的生命救助服务。<br/>（2）医院网络：与医院合作，院方特设24小时绿色通道，确保被救人员能够得到及时、适当的医疗救护和治疗。<br/>我们还将联合其他社会医疗资源，构建一个完善的空地一体的合作医疗网络。</p>
             <p class="title">会员服务期</p>
-            <p class="text">会员卡于购买当日生效，会员服务期位生效之日起一年。</p>
+            <p class="text">会员卡于购买当日生效，会员服务期为生效之日起一年。</p>
+           <p class="title">使用年限</p>
+           <p class="text">3人/年</p>
             <p class="flex centerv explain"><i class="flex fx fx-v"></i><span class="flex">成为我们的个人贵宾卡会员后，您可获得以下会员权益：</span></p>
             <table class="box">
                 <thead>
@@ -86,7 +88,7 @@
 <script src="../js/functions.js"></script>
 <script type="text/javascript">
 $(function () {
-   const is_perfect = 1;
+   const is_perfect = 0;
    // 购买
    $('a.buy_btn').click(_debounce(function () {
       const alert = `<div id="alert"><div class="mask"></div></div>`;
@@ -97,7 +99,7 @@ $(function () {
          cont = `<div class="content bg_white view">
             <div class="banner"><img src="../image/view.png" alt="购买成功" class="flex fitimg"></div>
             <h2 class="flex center title">购买成功！</h2>
-            <div class="text">恭喜您成功购买空中救援会员服务！</div>
+            <div class="flex center text">恭喜您成功购买空中救援会员服务！</div>
             <div class="flex center button"><a href="my_benefit.html" class="flex center btn">查看权益</a></div>
          </div>`;
       } else {
@@ -105,12 +107,13 @@ $(function () {
          cont = `<div class="content bg_white to_perfect">
             <div class="banner"><img src="../image/to_perfect.png" alt="购买成功" class="flex fitimg"></div>
             <h2 class="flex center title">购买成功！</h2>
-            <div class="text">立即完善身份信息，享受不限次直升机救援服务！</div>
+            <div class="flex center text">立即完善身份信息，享受不限次直升机救援服务！</div>
             <div class="flex center button"><a href="certification.html" class="flex center btn">去完善</a></div>
          </div>`;
       }
       $('#alert').append(cont);
    },500));
+
    // 关闭弹框
    $('body').on('click','.mask',function () {
       $('#alert').remove();
