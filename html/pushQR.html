@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+   <meta content="yes" name="apple-mobile-web-app-capable">
+   <meta content="black" name="apple-mobile-web-app-status-bar-style">
+   <title>推广二维码</title>
+   <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="pushQR" class="wrap">
+   <img src="" class="flex can">
+   <canvas class="myCanvas"></canvas>
+</div>
+</body>
+<script type="text/javascript">
+   window.onload = function () {
+      _$ = (str) => {return document.querySelector(str)}
+      const can = _$('.myCanvas'), ctx = can.getContext('2d');
+      let cover = '../image/user.jpg', name = '小胡同志啊', code = '../image/payQR.png';
+
+      // 背景图
+      const image = new Image();
+      image.src = '../image/pushQR-bj.png';
+      image.onload = function () {
+         can.width = image.width;
+         can.height = image.height;
+         ctx.save();
+         ctx.drawImage(image, 0, 0, image.width, image.height);
+         ctx.restore();
+         caover(cover, name);
+      }
+
+      function caover(cover, name) {
+         name = name.length > 4 ? `${name.substring(0,4)}...` : name;
+         ctx.save(); // 保存当前环境的状态
+         ctx.beginPath(); // 起始一条路径，或重置当前路径
+         ctx.arc(375, 140, 76, 0, Math.PI*2)
+         ctx.fillStyle = '#fff';
+         ctx.fill(); // 填充当前绘图
+         ctx.strokeStyle = '#fff';
+         ctx.lineWidth = '4'
+         ctx.stroke(); // 绘制已定义的路径
+         ctx.restore(); // 返回之前保存过的路径状态和属性
+         // 圆形头像
+         const image = new Image();
+         image.src = cover;
+         image.onload = function () {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(375, 140, 72, 0, Math.PI*2);
+            ctx.clip(); // 从原始画布剪切任意形状和尺寸的区域
+            ctx.drawImage(image, 304, 68, 144, 144);
+            ctx.restore();
+            QR(code);
+         }
+         ctx.font = 'bold 32px Arial';
+         ctx.fillStyle = '#fd7801';
+         ctx.textBaseline = "middle";
+         ctx.textAlign = 'center';
+         ctx.fillText(`我是${name}`, 375, 250);
+      }
+
+      function QR(code) {
+         const image = new Image();
+         image.src = code;
+         image.onload = function () {
+            ctx.save();
+            ctx.beginPath();
+            ctx.stroke();
+            ctx.drawImage(image, 268, 710, 212, 212);
+            ctx.restore();
+            _$('.can').src = can.toDataURL();
+         }
+      }
+
+   }
+</script>
+</html>

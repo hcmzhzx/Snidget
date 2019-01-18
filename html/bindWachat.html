@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+   <meta content="yes" name="apple-mobile-web-app-capable">
+   <meta content="black" name="apple-mobile-web-app-status-bar-style">
+   <title>绑定微信</title>
+   <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="bindWX" class="wrap">
+   <form class="bind">
+      <div class="bind-box">
+         <label class="flex item phone">
+            <i class="flex center fx fx-mobile"></i>
+            <input type="tel" name="phone" class="flexitem" maxlength='11' data-rule="m" data-errmsg="请填写正确手机号" placeholder="请输入手机号码">
+         </label>
+         <label class="flex item password">
+            <i class="flex center fx fx-auth"></i>
+            <input type="tel" name="code" class="flexitem" data-rule="code" data-errmsg="请填写正确验证码" placeholder="请输入验证码">
+            <a href="javascript:;" class="flex center code">获取验证码</a>
+         </label>
+         <label class="flex item password">
+            <i class="flex center fx fx-password"></i>
+            <input type="password" name="pwd" class="flexitem" data-rule="*6-18" data-errmsg="密码格式不正确" placeholder="6-18位英文、数字或符号的组合">
+            <i class="flex center fx fx-hide"></i>
+         </label>
+      </div>
+      <div class="bottom">
+         <a href="javascript:;" class="flex center submit">登录</a>
+         <p class="flex center tit">如果手机号未注册将自动注册</p>
+      </div>
+   </form>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script src="../js/functions.js"></script>
+<script src="../js/checkForm.js"></script>
+<script type="text/javascript">
+  $(function () {
+     // 切换密码框
+     $('.fx-hide').click(function () {
+        $(this).toggleClass('fx-check');
+        if ($(this).hasClass('fx-check')) {
+           $(this).siblings('input').prop('type', 'text')
+        } else {
+           $(this).siblings('input').prop('type', 'password')
+        }
+     })
+
+     // 获取短信验证码
+     smsTimer($('.code'),'重新获取','current')
+     $('.code').click(_debounce(function () {
+        let val = $('input[name=phone]').val().trim(), err= $('input[name=phone]').attr('data-errmsg');
+        const Rule = /^1[3-9]\d{9}$/;
+        if(!Rule.test(val)){
+           $('input[name=phone]').focus()
+           showMsg(err)
+           return
+        }
+        if ($(this).hasClass('current')) return;
+        showProgress('发送中...');
+
+        // 模拟数据请求(无实质作用)
+        setTimeout(()=>{
+           hideProgress(); //删除动画
+           smsTimer($(this), '重新获取', 'current', 60);
+        },1000)
+     },500))
+
+     // 表单验证
+     new checkForm({
+        form: '.bind',
+        btn: '.submit',
+        list: '.bind-box',
+        error: function (ele, err) {showMsg(err)},
+        complete: function (ele) {
+           console.log(ele);
+           showProgress('登录中...');
+        }
+     });
+
+
+  })
+</script>
+</html>

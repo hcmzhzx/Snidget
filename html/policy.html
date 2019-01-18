@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+   <meta content="yes" name="apple-mobile-web-app-capable">
+   <meta content="black" name="apple-mobile-web-app-status-bar-style">
+   <title>填写保单</title>
+   <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="policy" class="flexv minh">
+   <div class="flexitemv mainbox">
+         <div class="flex bg_white cardbox">
+            <div class="cardimg"><img src="../image/rk.png" class="flex fitimg"></div>
+            <div class="aroundv explain">
+               <div class="title">单次卡</div>
+               <div class="describe">直升机救援（1次/人）</div>
+            </div>
+         </div>
+         <form class="flexv formdata">
+            <div class="flex centerv input title">投保人信息</div>
+            <label class="flex bg_white input">
+               <span class="flex centerv">姓名</span>
+               <input type="text" name="name" data-rule="cname" data-errmsg="请输入2-4位中文姓名" class="flexitem centerv" placeholder="请填写姓名">
+            </label>
+            <label class="flex input bg_white">
+               <span class="flex centerv">证件类型</span>
+               <select class="flexitem centerv" name="type" data-rule="*" data-errmsg="请选择证件类型">
+                  <option value="身份证">身份证</option>
+               </select>
+            </label>
+            <label class="flex bg_white input">
+               <span class="flex centerv">证件号</span>
+               <input type="text" name="idcard" data-rule="sfz" data-errmsg="请输入正确身份证" maxlength="18" class="flexitem centerv" placeholder="请填写证件号">
+            </label>
+            <label class="flex bg_white input">
+               <span class="flex centerv">手机号</span>
+               <input type="tel" name="phone" maxlength='11' data-rule="m" data-errmsg="请填写正确手机号" class="flexitem centerv" placeholder="请填写手机号">
+            </label>
+            <label class="flex bg_white input startTime">
+               <span class="flex centerv">开始时间</span>
+               <input type="text" name="date" data-rule="*" data-errmsg="请选择正确时间" class="flexitem centerv endh" id="dateSelector" placeholder="请选择开始时间" readonly>
+            </label>
+         </form>
+         <div class="foot">
+            <div class="flex centerv favoree">
+               <i class="flex center fx fx-remind"></i><span>保险受益人为法定受益人</span>
+            </div>
+            <div class="flex centerv treaty">
+               <input type="checkbox" class="cheack">
+               <span>我已认真阅读 <a href="javascript:;">《保险条约》</a><a href="javascript:;">《保险经纪委托协议》，</a>了解并接受包括有关以上责任及免除责任条款,承保地域限制等约定。</span>
+            </div>
+         </div>
+
+   </div>
+   <div class="flex bg_white bottom">
+      <div class="flexitem centerv price">&yen;55.00</div>
+      <a href="javascript:;" class="flex center submit">提交</a>
+   </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../js/iScroll.js"></script>
+<script src="../js/Mdate.js"></script>
+<script src="../js/functions.js"></script>
+<script type="text/javascript">
+$(function () {
+   new Mdate("dateSelector", {
+      beginYear: new Date().getFullYear(),
+      beginMonth: new Date().getMonth()+1,
+      beginDay: new Date().getDate(),
+      endYear: "2099",
+      endMonth: "12",
+      endDay: "12",
+      format: "-"
+   })
+
+
+   $('.submit').click(function () {
+      let check = $('.treaty .cheack').prop('checked');
+      if(check){
+         // 验证表单
+         let Rule = {
+            "*": /^[\w\W]+$/,
+            "m": /^1[3-9]\d{9}$/,
+            "cname": /^[\u4e00-\u9fa5]{2,4}$/,
+            "sfz": /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/  // 出生日期(1800~2099)
+         }
+         let inpts = document.querySelector('.formdata').querySelectorAll('input,select'), posts = []
+         for(let v of inpts){
+            let val = v.value.trim(), name = v.getAttribute('name'), rule = v.getAttribute('data-rule'), ruleReg = Rule[rule], errmsg = v.getAttribute('data-errmsg');
+            if(name == 'date'){
+               if(new Date(val).getTime() < new Date().getTime()){
+                  showMsg(errmsg);
+                  return
+               }
+            }
+            if(!ruleReg.test(val)){
+               showMsg(errmsg);
+               return
+            } else {
+               posts[name] = val;
+            }
+         }
+         const alert = `<div id="alert" class="info"><div class="mask"></div></div>`;
+         $('#policy').append(alert);
+         let body = `<div class="content bg_white verify">
+            <h2 class="flex center title">请核对您的信息</h2>
+            <div class="flex center text">
+               姓名: ${posts.name}<br/>
+               身份证号码: ${posts.idcard}<br/>
+               手机号: ${posts.phone}<br/>
+            </div>
+            <div class="flex center button">
+               <a href="javascript:;" class="flexitem center btn cancel">取消</a>
+               <a href="javascript:;" class="flexitem center btn confirm">确认</a>
+            </div>
+         </div>`;
+         $('#alert.info').append(body);
+         $('#alert.info .cancel').click(function () {
+            $('#alert').remove();
+         })
+         $('#alert.info .confirm').click(function () {
+            console.log(posts);
+         })
+      } else {
+         Toast('请确认已阅读条约!');
+      }
+   })
+
+})
+</script>
+</html>

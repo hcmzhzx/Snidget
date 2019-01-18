@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
    <meta charset="UTF-8">
@@ -11,7 +11,6 @@
 <div id="certification" class="flexv wrap form">
    <div class="banner"><img src="../image/approve.jpg" alt="添加成员" class="flex fitimg"></div>
    <div class="hint">您需要进行实名认证，信息只能提交一次，请慎重填写</div>
-
    <form class="flexv members">
       <div class="flexv member">
          <div class="flexv bg_white list">
@@ -38,11 +37,12 @@
    </form>
 </div>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
 <script src="../js/functions.js"></script>
 <script src="../js/checkForm.js"></script>
 <script type="text/javascript">
    $(function () {
+      smsTimer($('a.code_btn'), '重新获取', 'current');
       // 获取验证码
       $('a.code_btn').click(_throttle(function () {
          if ($(this).hasClass('current')) return;
@@ -51,7 +51,7 @@
          // 模拟数据请求(无实质作用)
          setTimeout(()=>{
             hideProgress(); //删除动画
-            smsTimer($(this), '重新获取', 60, 'current');
+            smsTimer($(this), '重新获取', 'current', 60);
          },2000)
 
       }, 500));

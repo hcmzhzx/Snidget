@@ -8,10 +8,10 @@
    <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-<div id="add" class="flexv wrap mainbox form">
+<div id="add" class="flexv wrap form">
    <div class="banner"><img src="../image/add_bj.jpg" alt="添加成员" class="flex fitimg"></div>
    <div class="bg_white hint">您需要添加卡片使用成员，信息只能提交一次，请慎重填写</div>
-   <form class="flexitemv members">
+   <form class="flexitemv mainbox members">
       <div class="flexv member">
          <div class="between list-t">
             <p class="title"></p>
@@ -23,7 +23,7 @@
             </label>
             <label class="flex centerv input">
                <span class="flex tit">身份证号</span>
-               <input type="text" name="identity" class="flexitem" data-rule="sfz" data-errmsg="请输入正确身份证" data-sync="成员重复" maxlength="18" placeholder="请输入身份证号" value="42102319930212102X" readonly>
+               <input type="text" class="flexitem" name="identity" data-rule="sfz" data-errmsg="请输入正确身份证" data-sync="成员重复" maxlength="18" placeholder="请输入身份证号" value="42102319930212102X" readonly>
             </label>
          </div>
       </div>
@@ -43,7 +43,7 @@
       const data = [
          {name: "小明", identity: "42102319930212102X"},
          {name: "小明", identity: "42102319930212101X"}
-      ]
+      ];
 
       function init() {
          // 自动填写成员数

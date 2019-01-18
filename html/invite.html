@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+   <meta content="yes" name="apple-mobile-web-app-capable">
+   <meta content="black" name="apple-mobile-web-app-status-bar-style">
+   <title>推广用户</title>
+   <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="invite" class="wrap">
+   <div class="flexitem center verify min" style="display:-webkit-box">
+      <form class="flexv center verify-form">
+         <div class="flex center title"><span class="flexv name">XXXX</span>邀您使用</div>
+         <label class="flex item"><input type="tel" name="phone" class="flexitem" maxlength='11' data-errmsg="请填写正确手机号" placeholder="请输入手机号"></label>
+         <div class="flex center item slider">
+            <span class="slider_bg"></span><span class="text">滑动获取验证码</span><span class="label"></span>
+         </div>
+      </form>
+   </div>
+   <div class="flexv centerv invite min">
+      <h2 class="title">使用步骤</h2>
+      <div class="flex listImg"></div>
+      <form class="flexv invite-form">
+         <p class="tit">验证码已发送到手机：<span></span></p>
+         <div class="list">
+            <label class="flex item">
+               <input type="tel" name="code" class="flexitem" data-rule="code" data-errmsg="请填写正确验证码" placeholder="请输入验证码">
+               <a href="javascript:;" class="flex center code_btn">获取验证码</a>
+            </label>
+         </div>
+         <a href="javascript:;" class="flex submit"></a>
+      </form>
+   </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="../js/functions.js"></script>
+<script src="../js/checkForm.js"></script>
+<script type="text/javascript">
+_$ = (str) => {return document.querySelector(str)}
+$(function () {
+   let satrt = 0, W = 0, w = $(".slider").width()-$(".label").width(), ifEnd = false, slider = true;
+   _$('.label').addEventListener('touchstart',function (e) {
+      e.preventDefault();
+      satrt = e.touches[0].clientX;
+      let ipt = $('input[name=phone]'), val = ipt.val().trim(), err = ipt.attr('data-errmsg');
+      const Rule = /^1[3-9]\d{9}$/;
+      if(!Rule.test(val)){
+         //ipt.focus();
+         showMsg(err);
+         return;
+      }
+      slider = false
+   })
+   _$('.label').addEventListener('touchmove',function (e) {
+      if(slider) return;
+      e.preventDefault();
+      if(!ifEnd){
+         W = e.touches[0].clientX - satrt;
+         if(W>=w){
+            W = w;
+            ifEnd = true;
+            showProgress('发送中...');
+            let val = $('input[name=phone]').val().trim();
+
+            // 模拟数据请求(无实质作用)
+            setTimeout(() => {
+               $('.verify').hide();
+               hideProgress(); //删除动画
+               Toast('验证码已成功发送');
+               $('.invite-form .tit>span').text(val);
+               $('.invite').css({'display': '-webkit-box'});
+               smsTimer($('.code_btn'), '重新获取', 'current', 60);
+            }, 1000)
+         } else if(W<=0) {
+            W = 0
+         }
+         $(".slider_bg").width(2+W);
+         _$('.label').style.cssText = `transform: translate3d(${W}px, 0px, 0px)`;
+      }
+   })
+   _$('.label').addEventListener('touchend',function () {
+      if(!ifEnd){
+         const time = setInterval(()=>{
+            W-=10
+            if(W<=0){
+               clearTimeout(time);
+               W=0;
+            }
+            $(".slider_bg").width(2+W)
+            _$('.label').style.cssText = `transform: translate3d(${W}px, 0px, 0px)`
+         },10)
+      }
+   });
+
+   // 监听验证码改变按钮
+   $('input[name=code]').bind('input propertychange', function() {
+      if($(this).val().trim()){
+         $('a.submit').addClass('current')
+      } else {
+         $('a.submit').removeClass('current')
+      }
+   });
+
+   // 点击重新获取
+   $('.code_btn').click(function () {
+      if ($(this).hasClass('current')) return;
+      showProgress('发送中...');
+
+      // 模拟数据请求(无实质作用)
+      setTimeout(()=>{
+         hideProgress(); //删除动画
+         smsTimer($(this), '重新获取', 'current', 60);
+      },1000)
+   });
+
+   // 表单验证
+   new checkForm({
+      form: '.invite-form',
+      list: '.list',
+      btn: '.submit',
+      error: function (ele, err) {showMsg(err)},
+      complete: function (ele) {
+         console.log(ele);
+         showProgress('邀请中...');
+      }
+   });
+})
+</script>
+</html>

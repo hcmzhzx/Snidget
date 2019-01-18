@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+   <meta content="yes" name="apple-mobile-web-app-capable">
+   <meta content="black" name="apple-mobile-web-app-status-bar-style">
+   <title>找回密码</title>
+   <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<div id="forget" class="wrap" style="background:#fff">
+   <form class="code" style="display:block">
+      <div class="code-box">
+         <label class="flex item phone">
+            <i class="flex center fx fx-mobile"></i>
+            <input type="tel" name="phone" class="flexitem" maxlength='11' data-rule="m" data-errmsg="请填写正确手机号" placeholder="请输入手机号码">
+         </label>
+         <label class="flex item password">
+            <i class="flex center fx fx-auth"></i>
+            <input type="tel" name="code" class="flexitem" data-rule="code" data-errmsg="请填写正确验证码" placeholder="请输入图片验证码">
+            <span class="flex center codeImg"><img src="../image/view.png" class="flex fitimg"></span>
+         </label>
+      </div>
+      <a href="javascript:;" class="flex center submit next">下一步</a>
+   </form>
+   <form class="reset">
+      <p class="phone">请输入<span></span>收到的短信验证码</p>
+      <div class="reset-box">
+         <label class="flex item password">
+            <i class="flex center fx fx-auth"></i>
+            <input type="tel" name="code" class="flexitem" data-rule="code" data-errmsg="请填写正确验证码" placeholder="请输入验证码">
+            <a href="javascript:;" class="flex center code_btn">获取验证码</a>
+         </label>
+         <label class="flex item password">
+            <i class="flex center fx fx-password"></i>
+            <input type="password" name="pwd" class="flexitem" data-rule="*6-18" data-errmsg="密码格式不正确" placeholder="6-18位英文、数字或符号的组合">
+            <i class="flex center fx fx-hide"></i>
+         </label>
+      </div>
+      <a href="javascript:;" class="flex center submit confirm">确认</a>
+   </form>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script src="../js/functions.js"></script>
+<script src="../js/checkForm.js"></script>
+<script type="text/javascript">
+$(function () {
+   new checkForm({  // 验证码
+      form: '.code',
+      list: '.code-box',
+      btn: '.next',
+      error: function (ele, err) {showMsg(err)},
+      complete: function (ele) {
+         $('.reset').show()
+         $('.code').hide()
+         let phone = ele[0].phone, phoneHit = phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3");
+         $('p.phone>span').text(phoneHit);
+         // 获取短信验证码
+         smsTimer($('.code_btn'),'重新获取','current')
+         $('.code_btn').click(_debounce(function () {
+            if ($(this).hasClass('current')) return;
+            showProgress('发送中...');
+
+            // 模拟数据请求(无实质作用)
+            setTimeout(()=>{
+               hideProgress(); //删除动画
+               smsTimer($(this), '重新获取', 'current', 60);
+            },1000)
+         },500))
+
+         // 切换密码框
+         $('.fx-hide').click(function () {
+            $(this).toggleClass('fx-check');
+            if ($(this).hasClass('fx-check')) {
+               $(this).siblings('input').prop('type', 'text')
+            } else {
+               $(this).siblings('input').prop('type', 'password')
+            }
+         })
+      }
+   })
+
+   new checkForm({  // 重置
+      form: '.reset',
+      list: '.reset-box',
+      btn: '.confirm',
+      error: function (ele, err) {showMsg(err)},
+      complete: function (ele) {
+         console.log(ele);
+         showProgress('提交中...');
+
+         // 模拟数据请求(无实质作用)
+         setTimeout(()=>{
+            hideProgress(); //删除动画
+            showMsg('重置成功',1)
+            window.location.href = 'login.html'  // 重置成功返回到登录页面
+         },1000)
+      }
+   })
+
+
+
+})
+</script>
+</html>

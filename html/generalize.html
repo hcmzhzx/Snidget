@@ -21,19 +21,27 @@
    </div>
    <div class="flexitem centerh btn_box">
       <div class="between box">
-         <a href="javascirpt:;" class="flex center qrcode_btn">点击生成推广二维码</a>
-         <a href="javascirpt:;" class="flex center href_btn" data-copy="我是链接">&nbsp;点击生成推广链接&nbsp;</a>
+         <a href="pushQR.html" class="flex center qrcode_btn">点击生成推广二维码</a>
+         <a href="javascirpt:;" class="flex center href_btn" data-clipboard-text="我是链接">&nbsp;点击生成推广链接&nbsp;</a>
       </div>
    </div>
 </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/1.5.15/clipboard.min.js"></script>
 <script src="../js/functions.js"></script>
 <script type="text/javascript">
-   $(function () {
-      $('.href_btn').click(_debounce(function () {
-         copyPlate('.href_btn','复制成功');
-      },500));
-   })
+$(function () {
+   // 复制到剪贴板
+   const clipBoard = new Clipboard('.href_btn');
+   clipBoard.on('success', function (e) {
+      Toast('复制成功');
+      clipBoard.destroy();
+   });
+   clipBoard.on('error', function (e) {
+      Toast('复制失败');
+      clipBoard.destroy();
+   });
+})
 </script>
 </html>
